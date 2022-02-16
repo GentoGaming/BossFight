@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="15" height="8" tilewidth="128" tileheight="128" infinite="0" nextlayerid="5" nextobjectid="4">
+ <editorsettings>
+  <export target="../Level1.lua" format="lua"/>
+ </editorsettings>
+ <tileset firstgid="1" name="SpriteSheet" tilewidth="128" tileheight="128" tilecount="20" columns="2">
+  <image source="../../assets/Background/Tiles/SpriteSheet.png" width="256" height="1280"/>
+ </tileset>
+ <layer id="1" name="Grass" width="15" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+</data>
+ </layer>
+ <layer id="3" name="Ground" width="15" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,0,0,3,0,0,3,0,0,3,0,0,0,
+0,3,0,1,0,0,4,0,0,3,0,0,1,0,3
+</data>
+ </layer>
+ <objectgroup color="#080000" id="4" name="ColLayer">
+  <properties>
+   <property name="collidable" type="bool" value="true"/>
+  </properties>
+  <object id="1" x="45.4545" y="800" width="75.7576" height="81.8182"/>
+  <object id="3" x="3.0303" y="772.727" width="1918.18" height="257.576"/>
+ </objectgroup>
+</map>
