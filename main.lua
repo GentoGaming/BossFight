@@ -1,56 +1,57 @@
-local STI = require("sti")
-
- anim8 = require 'lib/anim8'
+local levelManager = require("levelManager")
 local UI = require("UI")
 local Bullet = require("Bullet")
-Player = require("player")
-BossEnemy = require("BossEnemy")
+local Bomb = require("Bomb")
 
 function love.load()
-    Map = STI("levels/level1.lua", {"box2d"})
-    World = love.physics.newWorld(0,1500,false)
-    World:setCallbacks(OnEnterCollision, OnExitCollision)
-    Map:box2d_init(World)
-    Map.layers.ColLayer.visible = false
+    levelManager:load()
     background = love.graphics.newImage("assets/Background/BG.png")
     Player:load()
     BossEnemy:load()
-
     UI:load()
-
-
 end
 
 function love.update(deltaTime)
     World:update(deltaTime)
-    Bullet.updateAll(deltaTime)
-    Player:update(deltaTime)
-    BossEnemy:update(deltaTime)
     UI:update(deltaTime)
 
+    if levelManager.gameOver then
+        return
+    end
+
+    Player:update(deltaTime)
+    BossEnemy:update(deltaTime)
+    levelManager:update()
+    Bullet.updateAll(deltaTime)
+    Bomb.updateAll(deltaTime)
 end
-
-
 
 function love.draw()
     love.graphics.draw(background)
-    Map:draw(0,0,1,1)
+    levelManager.level1:draw(0, 0, 1, 1)
+    UI:draw()
+
+    if levelManager.gameOver then
+        return
+    end
+
     Player:draw()
     BossEnemy:draw()
     Bullet.drawAll()
-    UI:draw()
-
+    Bomb.drawAll()
 end
-
 
 function love.keypressed(keyCode)
     Player:keypressed(keyCode)
 end
 
-
-
-function OnEnterCollision(firstfixture, otherFixture,hitResult)
-   if Bullet:OnEnterCollision(firstfixture, otherFixture,hitResult) then return end
-    Player:OnEnterCollision(firstfixture, otherFixture,hitResult)
-    BossEnemy:OnEnterCollision(firstfixture, otherFixture,hitResult)
+function OnEnterCollision(firstfixture, otherFixture, hitResult)
+    if Bomb:OnEnterCollision(firstfixture, otherFixture, hitResult) then
+        return
+    end
+    if Bullet:OnEnterCollision(firstfixture, otherFixture, hitResult) then
+        return
+    end
+    Player:OnEnterCollision(firstfixture, otherFixture, hitResult)
+    BossEnemy:OnEnterCollision(firstfixture, otherFixture, hitResult)
 end
